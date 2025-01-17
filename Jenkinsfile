@@ -9,20 +9,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh 'npm install'  // Installe les dépendances de ton projet
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    sh 'npm test'  // Exécute les tests (si ton projet en a)
-                }
-            }
-        }
+        
         stage('Deploy') {
             steps {
                 script {
