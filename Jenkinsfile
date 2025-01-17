@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/USER/REPO.git' // Remplacez par votre dépôt
+                git branch: 'master', url: 'https://github.com/Tristan97411/ProjetExcel.git' // Remplacez par votre dépôt
             }
         }
         stage('Install Dependencies') {
