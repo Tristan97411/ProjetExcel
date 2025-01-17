@@ -1,20 +1,21 @@
 pipeline {
     agent any
+    tools {
+        nodejs "NodeJS"  // Assurez-vous d'avoir un tool nommé "NodeJS" configuré dans Jenkins
+    }
     stages {
         stage('Checkout') {
             steps {
-                checkout scm // Cela récupère le code depuis ton repository
+                checkout scm // Récupère le code depuis ton repository
             }
         }
         stage('Install Dependencies') {
             steps {
                 script {
-                    npm install
-                    sh 'echo "Installation des dépendances"'  // Juste pour tester, change ceci par 'npm install' ou ce qui est nécessaire pour ton projet
+                    sh 'npm install'  // Exécute npm install pour installer les dépendances
                 }
             }
         }
-        
         stage('Test') {
             steps {
                 // Si tu as des tests à exécuter, ajoute-les ici
@@ -23,7 +24,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                node server.js
+                sh 'node server.js'  // Lancer le serveur node.js pour le déploiement
                 sh 'echo "Deploying application"'
             }
         }
