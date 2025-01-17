@@ -1,57 +1,46 @@
 pipeline {
-    agent any  // Exécute le pipeline sur n'importe quel agent disponible
-
+    agent any
     environment {
-        // Définir des variables d'environnement si nécessaire
-        NODE_ENV = 'production'
+        // Variables d'environnement si nécessaire
     }
-
     stages {
-        // Étape 1 : Cloner le dépôt
         stage('Checkout') {
             steps {
-                // Cloner le dépôt GitHub
-                git url: 'https://github.com/Tristan97411/ProjetExcel.git'
+                // Récupérer le code depuis le dépôt GitHub
+                checkout scm
             }
         }
-
-        // Étape 2 : Installer les dépendances
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Assurer que les dépendances sont installées
-                    sh 'npm install'
+                    // Installer les dépendances (ici pour un projet Node.js)
+                    sh 'npm install'  // Remplace cette ligne selon ton projet
                 }
             }
         }
-
-        // Étape 3 : Lancer les tests (si tu en as)
-        stage('Run Tests') {
+        stage('Build') {
             steps {
-                script {
-                    // Lancer les tests unitaires si tu en as
-                    sh 'npm test'
-                }
+                // Par exemple, pour un projet Node.js
+                sh 'npm run build'  // Remplace cette ligne selon ton projet
             }
         }
-
-        // Étape 4 : Déployer l'application (exemple)
+        stage('Test') {
+            steps {
+                // Exécuter les tests (selon ton projet)
+                sh 'npm test'  // Remplace cette ligne selon ton projet
+            }
+        }
         stage('Deploy') {
             steps {
-                script {
-                    // Exemple : Déploiement sur un serveur (tu devras personnaliser cette étape selon ton environnement)
-                    sh 'node server.js'
-                }
+                // Déployer ton application (si nécessaire)
+                sh 'node server.js'  // Remplace cette ligne selon ton projet
             }
         }
     }
-
     post {
-        success {
-            echo 'le serveur lancé avec succès !'
-        }
-        failure {
-            echo 'Le serveur a échoué.'
+        always {
+            // Ce bloc s'exécute après le build, que ce soit un succès ou un échec
+            echo 'Pipeline terminé'
         }
     }
 }
