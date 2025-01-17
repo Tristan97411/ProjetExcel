@@ -1,14 +1,29 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS' // Utilise le nom configuré dans Global Tool Configuration
+        nodejs 'NodeJS' // Nom configuré dans Global Tool Configuration
     }
     stages {
         stage('Check Node.js') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
+                bat 'node -v'
+                bat 'npm -v'
             }
+        }
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm install'
+            }
+        }
+        stage('Run Application') {
+            steps {
+                bat 'node server.js'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Pipeline terminé.'
         }
     }
 }
