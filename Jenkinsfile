@@ -1,5 +1,4 @@
 pipeline {
-    agent { label 'nodejs-agent' }  // Spécifie l'agent qui a Node.js installé
     tools {
         nodejs 'NodeJS'  // Assure-toi que 'NodeJS' est configuré correctement dans Jenkins
     }
