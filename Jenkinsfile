@@ -1,13 +1,12 @@
 pipeline {
     agent any
     tools {
-        nodejs 'NodeJS' // Nom configuré dans Global Tool Configuration
+        nodejs 'NodeJS' // Configurer dans Global Tool Configuration
     }
     stages {
-        stage('Check Node.js') {
+        stage('Checkout') {
             steps {
-                bat 'node -v'
-                bat 'npm -v'
+                git branch: 'main', url: 'https://github.com/USER/REPO.git' // Remplacez par votre dépôt
             }
         }
         stage('Install Dependencies') {
@@ -15,15 +14,33 @@ pipeline {
                 bat 'npm install'
             }
         }
-        stage('Run Application') {
+        stage('Unit Tests') {
             steps {
-                bat 'node server.js'
+                bat 'npm test' // Ajoutez vos tests unitaires ici
+            }
+        }
+        stage('Integration Tests') {
+            steps {
+                bat 'npm run test:integration' // Configurez vos tests d'intégration dans le projet
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'node server.js' // Compilez ou construisez le projet
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                bat 'echo Déploiement sur staging...' // Remplacez par vos commandes de déploiement
             }
         }
     }
     post {
-        always {
-            echo 'Pipeline terminé.'
+        success {
+            echo 'Build et déploiement réussis.'
+        }
+        failure {
+            echo 'Une erreur est survenue.'
         }
     }
 }
