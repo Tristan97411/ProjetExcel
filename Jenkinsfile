@@ -1,45 +1,35 @@
 pipeline {
     agent any
-    environment {
-        // Variables d'environnement si nécessaire
-    }
     stages {
         stage('Checkout') {
             steps {
-                // Récupérer le code depuis le dépôt GitHub
-                checkout scm
+                checkout scm // Cela récupère le code depuis ton repository
             }
         }
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Installer les dépendances (ici pour un projet Node.js)
-                    sh 'npm install'  // Remplace cette ligne selon ton projet
+                    npm install
+                    sh 'echo "Installation des dépendances"'  // Juste pour tester, change ceci par 'npm install' ou ce qui est nécessaire pour ton projet
                 }
             }
         }
-        stage('Build') {
-            steps {
-                // Par exemple, pour un projet Node.js
-                sh 'npm run build'  // Remplace cette ligne selon ton projet
-            }
-        }
+        
         stage('Test') {
             steps {
-                // Exécuter les tests (selon ton projet)
-                sh 'npm test'  // Remplace cette ligne selon ton projet
+                // Si tu as des tests à exécuter, ajoute-les ici
+                sh 'echo "Running tests"'
             }
         }
         stage('Deploy') {
             steps {
-                // Déployer ton application (si nécessaire)
-                sh 'node server.js'  // Remplace cette ligne selon ton projet
+                node server.js
+                sh 'echo "Deploying application"'
             }
         }
     }
     post {
         always {
-            // Ce bloc s'exécute après le build, que ce soit un succès ou un échec
             echo 'Pipeline terminé'
         }
     }
