@@ -1,12 +1,12 @@
 pipeline {
     agent any
     tools {
-        nodejs "NodeJS Plugin"  // Assurez-vous d'avoir un tool nommé "NodeJS" configuré dans Jenkins
+        nodejs 'NodeJS'  // Assurez-vous que 'NodeJS' correspond au nom du tool que tu as configuré dans Jenkins
     }
     stages {
         stage('Checkout') {
             steps {
-                checkout scm // Récupère le code depuis ton repository
+                checkout scm
             }
         }
         stage('Install Dependencies') {
@@ -18,7 +18,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                // Si tu as des tests à exécuter, ajoute-les ici
                 sh 'echo "Running tests"'
             }
         }
