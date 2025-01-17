@@ -8,12 +8,7 @@ pipeline {
             steps {
                 checkout scm
             }
-        }      
-        stage('Test') {
-            steps {
-                sh 'echo "Running tests"'
-            }
-        }
+        }              
         stage('Deploy') {
             steps {
                 sh 'node server.js'  // Lancer le serveur node.js pour le déploiement
