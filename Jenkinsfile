@@ -1,6 +1,7 @@
 pipeline {
+    agent any
     tools {
-        nodejs 'NodeJS'  // Assure-toi que 'NodeJS' est configuré correctement dans Jenkins
+        nodejs 'NodeJS'  // Assure-toi que le nom ici correspond à celui configuré dans Jenkins
     }
     stages {
         stage('Checkout') {
@@ -8,24 +9,25 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Verify Node.js and npm') {
-            steps {
-                script {
-                    sh 'node -v'
-                    sh 'npm -v'
-                }
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 script {
-                    sh 'npm install'  // Exécute npm install pour installer les dépendances
+                    sh 'npm install'  // Installe les dépendances de ton projet
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    sh 'npm test'  // Exécute les tests (si ton projet en a)
                 }
             }
         }
         stage('Deploy') {
             steps {
-                sh 'node server.js'  // Lance le serveur Node.js pour le déploiement
+                script {
+                    sh 'node server.js'  // Lance ton application
+                }
             }
         }
     }
