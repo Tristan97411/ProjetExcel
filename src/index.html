@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices Excel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div id="notificationsContainer"></div>
+
+    <button onclick="window.location.href='/connexion.html';">Se connecter</button>
+    <button id="logoutButton" class="logout-button">Se déconnecter</button>
+    <header>
+        <h1>Exercices Interactifs Excel</h1>
+    </header>
+
+    <nav class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'exercice1')" aria-controls="exercice1" aria-selected="true">Exercice 1</button>
+        <button class="tab-link" onclick="openTab(event, 'exercice2')" aria-controls="exercice2" aria-selected="false">Exercice 2</button>
+        <button class="tab-link" onclick="openTab(event, 'exercice3')" aria-controls="exercice3" aria-selected="false">Exercice 3</button>
+        <button class="tab-link" onclick="openTab(event, 'exercice4')" aria-controls="exercice4" aria-selected="false">Exercice 4</button>
+        <button class="tab-link" onclick="openTab(event, 'exercice5')" aria-controls="exercice5" aria-selected="false">Exercice 5</button>
+        <button class="tab-link" onclick="openTab(event, 'exercice6')" aria-controls="exercice6" aria-selected="false">Exercice 6</button>
+
+    </nav>
+    
+
+    <!-- Exercice 1 -->
+    <section id="exercice1" class="tab-content active">
+        <h2>Les Bases Essentielles à Connaître</h2>
+
+        <nav class="sub-tabs">
+            <button class="sub-tab-link active" onclick="openSubTab(event, 'exercice1-1')" aria-controls="exercice1-1" aria-selected="true">Exercice 1.1</button>
+            <button class="sub-tab-link" onclick="openSubTab(event, 'exercice1-2')" aria-controls="exercice1-2" aria-selected="false">Exercice 1.2</button>
+        </nav>
+
+        <!-- Exercice 1.1 -->
+        <article id="exercice1-1" class="sub-tab-content active">
+            <h3>Exercice 1.1 : Tableau des ventes</h3>
+            <table id="salesTable">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Nombre Achats</th>
+                        <th>Nombre Ventes</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Produit A</td>
+                        <td>89</td>
+                        <td>10</td>
+                        <td>79</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Formulaire pour ajouter un produit -->
+            <h3>Ajouter un Produit</h3>
+            <form id="addProductForm">
+                <div class="input-group">
+                    <label for="newProductName">Nom du produit</label>
+                    <input type="text" id="newProductName" placeholder="Nom du produit" required>
+                </div>
+                <div class="input-group">
+                    <label for="newProductAchats">Achats</label>
+                    <input type="number" id="newProductAchats" placeholder="Achats" required>
+                </div>
+                <div class="input-group">
+                    <label for="newProductVentes">Ventes</label>
+                    <input type="number" id="newProductVentes" placeholder="Ventes" required>
+                </div>
+                <button type="button" onclick="addNewProduct()">Ajouter</button>
+            </form>
+        </article>
+
+        <!-- Exercice 1.2 -->
+        <article id="exercice1-2" class="sub-tab-content">
+            <h3>Exercice 1.2 : Calcul de l'âge</h3>
+            <table id="marketShareTable">
+                <thead>
+                    <tr>
+                        <th>Pays</th>
+                        <th>Chiffre d'affaires</th>
+                        <th>Part de marché</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les données seront injectées ici -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <td id="totalChiffreAffaires">0,00 €</td> 
+                        <td id="totalPartDeMarche"></td>
+                        
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h3>Ajouter un Pays</h3>
+            <form id="addCountryForm" class="add-country-form">
+                <div class="input-group">
+                    <label for="newCountryName">Nom du pays</label>
+                    <input type="text" id="newCountryName" placeholder="Nom du pays" required>
+                </div>
+                <div class="input-group">
+                    <label for="newCountryRevenue">Chiffre d'affaires</label>
+                    <input type="number" id="newCountryRevenue" placeholder="Chiffre d'affaires en EUR" required>
+                </div>
+                <button type="button" onclick="addNewCountry()">Ajouter</button>
+            </form>
+        </article>
+    </section>
+
+    <!-- Exercice 2 -->
+    <section id="exercice2" class="tab-content active">
+        <h2>La mise en forme Conditionnelle</h2>
+    
+        <nav class="sub-tabs">
+    
+            <!-- Formulaire de saisie -->
+            <form id="addPaymentForm">
+                <label for="firstName">Prénom :</label>
+                <input type="text" id="firstName" required>
+    
+                <label for="gender">Sexe :</label>
+                <select id="gender" required>
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+    
+                <label for="amountPaid">Montant payé (€) :</label>
+                <input type="number" id="amountPaid" min="0" required>
+    
+                <button type="submit">Ajouter</button>
+            </form>
+            
+            <!-- Tableau des paiements -->
+            <table id="paymentTable">
+                <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Sexe</th>
+                        <th>Montant payé</th>
+                        <th>Action</th>  <!-- Colonne d'action pour supprimer -->
+                    </tr>
+                </thead>
+                <tbody id="paymentsTableBody">
+                    <!-- Les données seront injectées ici -->
+                </tbody>
+            </table>
+            
+        </nav>
+    </section>
+    <!-- Exercice 3 -->
+
+    <div id="exercice3" class="tab-content">
+        <h2>Exercice 3 - Graphique Croisé Dynamique</h2>
+        <button id="generatePivotButton">Générer le graphique croisé dynamique</button>
+        <canvas id="pivotChart" width="400" height="200"></canvas>
+        <table>
+            <thead>
+                <tr>
+                    <th>Genre</th>
+                    <th>Nombre de personnes payées</th>
+                    <th>Total payé</th>
+                    <th>Nombre de personnes non payées</th>
+                    <th>Total non payé</th>
+                </tr>
+            </thead>
+            <tbody id="pivotTableBody">
+                <!-- Les lignes du tableau croisé dynamique seront ajoutées ici -->
+            </tbody>
+        </table>
+        
+    </div>
+    <div id="exercice4" class="tab-content">
+        <h2>RECHERCHEV ET RECHERCHEX</h2>
+        <label for="searchTerm">Entrez un prénom (RECHERCHEV) :</label>
+    <input type="text" id="prenomInput" placeholder="Prénom">
+    
+    <button id="searchVButton">Rechercher par prénom</button>
+    
+    <br><br>
+    
+    <label for="searchSexe">Entrez un sexe (RECHERCHEX) :</label>
+    <input type="text" id="sexeInput" placeholder="Sexe (Homme/Femme)">
+    
+    <button id="searchXButton">Rechercher par sexe</button>
+    
+    <h3>Résultats :</h3>
+    <div id="results"></div>
+
+    </div>
+    <div id="exercice5" class="tab-content">
+        <h2>Cas de facturation</h2>
+
+<form id="calculationForm">
+    <label for="price">Prix de la marchandise (€) :</label>
+    <input type="number" id="price" name="price" step="0.01" required>
+
+    <label for="isGrossiste">Êtes-vous un grossiste ?</label>
+    <select id="isGrossiste" name="isGrossiste" required>
+        <option value="true">Oui</option>
+        <option value="false">Non</option>
+    </select>
+
+    <label for="isPaiementComptant">Paiement comptant ?</label>
+    <select id="isPaiementComptant" name="isPaiementComptant" required>
+        <option value="true">Oui</option>
+        <option value="false">Non</option>
+    </select>
+
+    <label for="isVenteEmportee">Vente à emporter ?</label>
+    <select id="isVenteEmportee" name="isVenteEmportee" required>
+        <option value="true">Oui</option>
+        <option value="false">Non</option>
+    </select>
+
+    <button type="submit">Calculer</button>
+</form>
+
+<h3>Résultats du calcul :</h3>
+
+<!-- Tableau pour afficher les résultats -->
+<table id="calculationResults" border="1">
+    <thead>
+        <tr>
+            <th>Prix initial (€)</th>
+            <th>Remises (%)</th>
+            <th>Escompte (%)</th>
+            <th>Frais de port (€)</th>
+            <th>TVA (%)</th>
+            <th>Total (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Les résultats seront ajoutés ici -->
+    </tbody>
+</table>
+
+    </div>
+    <main id="exercice6" class="tab-content">
+        <h2>MIN , MAX , MOY</h2>
+        <form id="ajoutForm">
+            <input type="number" id="annee" placeholder="Année" required>
+            <input type="number" id="chiffreAffaire" placeholder="Chiffre d'Affaire" required>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <!-- Tableau des données -->
+        <table class="table-sales" id="salesTable-unique">
+            <thead>
+                <tr>
+                    <th>Année</th>
+                    <th>Chiffre d'Affaire</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- Statistiques -->
+        <div id="resultSection">
+            <h3>Résultats des calculs</h3>
+            <p><strong>Min :</strong> <span id="minChiffreAffaire">-</span></p>
+            <p><strong>Max :</strong> <span id="maxChiffreAffaire">-</span></p>
+            <p><strong>Moyenne :</strong> <span id="moyenne">-</span></p>
+        </div>
+    </main>
+    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>
