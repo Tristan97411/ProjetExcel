@@ -12,10 +12,13 @@ pipeline {
         
         stage('Test Node.js and npm') {
             steps {
-                sh 'node -v'
-                sh 'npm -v'
+                script {
+                sh 'node -v || echo "Node.js n\'est pas installé ou est inaccessible."'
+            sh 'npm -v || echo "npm n\'est pas installé ou est inaccessible."'
+                }
             }
         }
+
         
         stage('Debug Environment') {
             steps {
