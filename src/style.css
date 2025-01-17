@@ -371,6 +371,7 @@ canvas {
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+    gap : 5px;
 }
 
 .logout-button:hover {
