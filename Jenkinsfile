@@ -1,32 +1,57 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'NodeJS' // Remplacez 'NodeJS' par le nom de votre configuration Node.js
+    }
+    environment {
+        NODE_ENV = 'development'
+    }
     stages {
-        stage('Test Node.js and npm') {
+        stage('Checkout') {
             steps {
-                script {
-                    sh 'node -v || echo "Node.js n\'est pas installé ou est inaccessible."'
-                    sh 'npm -v || echo "npm n\'est pas installé ou est inaccessible."'
-                }
+                git branch: 'main', url: 'https://github.com/username/your-repo.git'
             }
         }
         stage('Install Dependencies') {
             steps {
-                script {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
-        stage('Start Application') {
+        stage('Run Unit Tests') {
             steps {
-                script {
-                    sh 'node server.js'
-                }
+                sh 'npm test'
+            }
+        }
+        stage('Run Integration Tests') {
+            steps {
+                sh 'npm run test:integration'
+            }
+        }
+        stage('Build Project') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                sh 'npm run deploy:staging'
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                sh 'npm run deploy:prod'
             }
         }
     }
     post {
         always {
             echo 'Pipeline terminé'
+        }
+        success {
+            echo 'Build et tests réussis'
+        }
+        failure {
+            echo 'Échec du pipeline'
         }
     }
 }
