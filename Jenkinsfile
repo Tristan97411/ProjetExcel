@@ -1,18 +1,32 @@
 pipeline {
-    agent any
+    agent { label 'nodejs-agent' }  // Spécifie l'agent qui a Node.js installé
     tools {
-        nodejs 'NodeJS'  // Assurez-vous que 'NodeJS' correspond au nom du tool que tu as configuré dans Jenkins
+        nodejs 'NodeJS'  // Assure-toi que 'NodeJS' est configuré correctement dans Jenkins
     }
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
-        }              
+        }
+        stage('Verify Node.js and npm') {
+            steps {
+                script {
+                    sh 'node -v'
+                    sh 'npm -v'
+                }
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh 'npm install'  // Exécute npm install pour installer les dépendances
+                }
+            }
+        }
         stage('Deploy') {
             steps {
-                sh 'node server.js'  // Lancer le serveur node.js pour le déploiement
-                sh 'echo "Deploying application"'
+                sh 'node server.js'  // Lance le serveur Node.js pour le déploiement
             }
         }
     }
