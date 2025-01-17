@@ -8,14 +8,7 @@ pipeline {
             steps {
                 checkout scm
             }
-        }
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    sh 'npm install'  // Exécute npm install pour installer les dépendances
-                }
-            }
-        }
+        }      
         stage('Test') {
             steps {
                 sh 'echo "Running tests"'
