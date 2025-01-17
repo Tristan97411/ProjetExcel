@@ -1,20 +1,18 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'NodeJS' // Nom de l'installation dans Jenkins
+    }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
-    }
-    post {
-        always {
-            echo 'Pipeline terminé'
+        stage('Run Application') {
+            steps {
+                sh 'node server.js'
+            }
         }
     }
 }
